@@ -20,22 +20,27 @@ public class CommandGetHopperWand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String lbl, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
-            ItemStack wand = new ItemStack(Material.STICK, 1);
-            ItemMeta meta = wand.getItemMeta();
-            meta.setDisplayName(ChatColor.AQUA + "Collection Hopper Wand");
-            meta.setLore(Arrays.asList(ChatColor.AQUA + "Right click this on a " + ChatColor.WHITE + "HOPPER", ChatColor.AQUA + "to setup a collection hopper!"));
-            wand.setItemMeta(meta);
+            if(player.hasPermission("collectionhoppers.gethopperwand")) {
+                ItemStack wand = new ItemStack(Material.STICK, 1);
+                ItemMeta meta = wand.getItemMeta();
+                meta.setDisplayName(ChatColor.AQUA + "Collection Hopper Wand");
+                meta.setLore(Arrays.asList(ChatColor.AQUA + "Left click this on a " + ChatColor.WHITE + "HOPPER", ChatColor.AQUA + "to setup a collection hopper!"));
+                wand.setItemMeta(meta);
 
-            if(args.length > 0) {
-                wand.setAmount(NumberUtils.toInt(args[0], 1));
+                if (args.length > 0) {
+                    wand.setAmount(NumberUtils.toInt(args[0], 1));
+                }
+
+                player.getInventory().addItem(wand);
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&bCollection Hoppers&8] &bGiven &f" + player.getName() + " " + wand.getAmount() + " &bhopper wands!"));
+            } else {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&bCollection Hoppers&8] &bYou do not have permission for this!"));
             }
-
-            player.getInventory().addItem(wand);
         } else {
             ItemStack wand = new ItemStack(Material.STICK, 1);
             ItemMeta meta = wand.getItemMeta();
             meta.setDisplayName(ChatColor.AQUA + "Collection Hopper Wand");
-            meta.setLore(Arrays.asList(ChatColor.AQUA + "Right click this on a " + ChatColor.WHITE + "HOPPER", ChatColor.AQUA + "to setup a collection hopper!"));
+            meta.setLore(Arrays.asList(ChatColor.AQUA + "Left click this on a " + ChatColor.WHITE + "HOPPER", ChatColor.AQUA + "to setup a collection hopper!"));
             wand.setItemMeta(meta);
 
             if(args.length > 0) {

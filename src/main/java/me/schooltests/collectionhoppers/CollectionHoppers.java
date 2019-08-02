@@ -62,6 +62,8 @@ public class CollectionHoppers extends JavaPlugin {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        getServer().getScheduler().cancelTasks(this);
     }
 
     public static CollectionHoppers getPlugin() {

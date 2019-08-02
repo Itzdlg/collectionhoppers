@@ -24,7 +24,7 @@ public class InteractHandler implements Listener {
         if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if(event.getClickedBlock().getType().equals(Material.HOPPER)) {
                 if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null) {
-                    if (event.getItem().getItemMeta().getLore().equals(Arrays.asList(ChatColor.AQUA + "Right click this on a " + ChatColor.WHITE + "HOPPER", ChatColor.AQUA + "to setup a collection hopper!"))) {
+                    if (event.getItem().getItemMeta().getLore().equals(Arrays.asList(ChatColor.AQUA + "Left click this on a " + ChatColor.WHITE + "HOPPER", ChatColor.AQUA + "to setup a collection hopper!"))) {
                         //if (!plugin.collectionHoppers.containsKey(event.getClickedBlock().getChunk())) {
                         if(!plugin.hasChunk(event.getClickedBlock().getChunk())) {
                             CollectionHopper col = new CollectionHopper(event.getClickedBlock().getLocation());
