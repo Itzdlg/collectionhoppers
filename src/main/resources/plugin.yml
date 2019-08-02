@@ -1,0 +1,8 @@
+main: me.schooltests.collectionhoppers.CollectionHoppers
+name: CollectionHoppers
+author: SchoolTests
+version: 1.0
+commands:
+  getHopperWand:
+    usage: /gethopperwand
+    description: test command
