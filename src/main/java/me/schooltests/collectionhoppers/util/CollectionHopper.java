@@ -1,5 +1,6 @@
 package me.schooltests.collectionhoppers.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -11,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class CollectionHopper implements ConfigurationSerializable {
     private Location location;
@@ -48,16 +50,17 @@ public class CollectionHopper implements ConfigurationSerializable {
         return chestLocation;
     }
 
+
     public Map<String, Object> serialize() {
         LinkedHashMap<String, Object> result = new LinkedHashMap<String, Object>();
-        result.put("location", location);
-        if(chestLocation != null) result.put("chestLocation", chestLocation);
+        result.put("location", Util.locationToString(location));
+        if(chestLocation != null) result.put("chestLocation", Util.locationToString(chestLocation));
         return result;
     }
 
     public static CollectionHopper deserialize(Map<String, Object> args) {
-        CollectionHopper hopper = new CollectionHopper((Location) args.get("location"));
-        if(args.containsKey("chestLocation")) hopper.setChestLocation((Location) args.get("chestLocation"));
+        CollectionHopper hopper = new CollectionHopper(Util.stringToLocation((String) args.get("location")));
+        if(args.containsKey("chestLocation")) hopper.setChestLocation(Util.stringToLocation((String) args.get("chestLocation")));
         return hopper;
     }
 }

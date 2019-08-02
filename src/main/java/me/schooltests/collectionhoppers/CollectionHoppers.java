@@ -1,9 +1,7 @@
 package me.schooltests.collectionhoppers;
 
 import me.schooltests.collectionhoppers.commands.CommandGetHopperWand;
-import me.schooltests.collectionhoppers.listener.BlockBreakHandler;
-import me.schooltests.collectionhoppers.listener.InteractHandler;
-import me.schooltests.collectionhoppers.listener.MobDeathHandler;
+import me.schooltests.collectionhoppers.listener.*;
 import me.schooltests.collectionhoppers.util.CollectionHopper;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -13,13 +11,12 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class CollectionHoppers extends JavaPlugin {
     private static CollectionHoppers plugin;
+    public Map<UUID, CollectionHopper> linkingHoppers = new HashMap<UUID, CollectionHopper>();
+    public Map<UUID, CollectionHopper> openHoppers = new HashMap<UUID, CollectionHopper>();
     public Map<String, CollectionHopper> collectionHoppers = new HashMap<String, CollectionHopper>();
     public YamlConfiguration config = new YamlConfiguration();
 
@@ -51,6 +48,8 @@ public class CollectionHoppers extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InteractHandler(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakHandler(), this);
         getServer().getPluginManager().registerEvents(new MobDeathHandler(), this);
+        getServer().getPluginManager().registerEvents(new InvClickHandler(), this);
+        getServer().getPluginManager().registerEvents(new InvCloseHandler(), this);
     }
 
     @Override
