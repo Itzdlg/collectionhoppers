@@ -3,12 +3,12 @@ package me.schooltests.collectionhoppers;
 import me.schooltests.collectionhoppers.commands.CommandGetHopperWand;
 import me.schooltests.collectionhoppers.listener.*;
 import me.schooltests.collectionhoppers.util.CollectionHopper;
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.util.*;
@@ -50,17 +50,25 @@ public class CollectionHoppers extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MobDeathHandler(), this);
         getServer().getPluginManager().registerEvents(new InvClickHandler(), this);
         getServer().getPluginManager().registerEvents(new InvCloseHandler(), this);
+
+        new BukkitRunnable() {
+            public void run() {
+                saveData();
+                for(Player plr : Bukkit.getOnlinePlayers()) {
+                    if(plr.hasPermission("collectionhoppers.save")) {
+                        plr.sendMessage(ChatColor.GREEN + "Collection Hopper data saved!");
+                        plr.getWorld().playSound(plr.getLocation(), Sound.NOTE_PLING, 50, 1);
+                    }
+                }
+            }
+        }.runTaskTimer(this, 54000, 54000);
     }
 
     @Override
     public void onDisable() {
-        try {
-            File file = new File(getDataFolder(), "config.yml");
-            //config.set("data", collectionHoppers);
-            saveData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //File file = new File(getDataFolder(), "config.yml");
+        //config.set("data", collectionHoppers);
+        saveData();
 
         getServer().getScheduler().cancelTasks(this);
     }

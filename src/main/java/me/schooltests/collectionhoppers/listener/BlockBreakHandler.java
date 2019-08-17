@@ -13,8 +13,10 @@ public class BlockBreakHandler implements Listener {
     public void onBreak(BlockBreakEvent event) {
         if(event.getBlock().getType().equals(Material.HOPPER)) {
             if(plugin.hasChunk(event.getBlock().getChunk())) {
-                plugin.removeChunk(event.getBlock().getChunk());
-                event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&bCollection Hoppers&8] &bBroken Collection Hopper in this chunk"));
+                if(plugin.getHopperFromChunk(event.getBlock().getChunk()).getLocation().equals(event.getBlock().getLocation())) {
+                    plugin.removeChunk(event.getBlock().getChunk());
+                    event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&bCollection Hoppers&8] &bBroken Collection Hopper in this chunk"));
+                }
             }
         }
     }
