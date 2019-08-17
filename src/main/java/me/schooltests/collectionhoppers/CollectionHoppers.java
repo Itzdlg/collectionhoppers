@@ -1,6 +1,7 @@
 package me.schooltests.collectionhoppers;
 
 import me.schooltests.collectionhoppers.commands.CommandGetHopperWand;
+import me.schooltests.collectionhoppers.commands.HopperInfoCommand;
 import me.schooltests.collectionhoppers.listener.*;
 import me.schooltests.collectionhoppers.util.CollectionHopper;
 import org.bukkit.*;
@@ -45,11 +46,13 @@ public class CollectionHoppers extends JavaPlugin {
         }
 
         getCommand("getHopperWand").setExecutor(new CommandGetHopperWand());
+        getCommand("hopperinfo").setExecutor(new HopperInfoCommand());
         getServer().getPluginManager().registerEvents(new InteractHandler(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakHandler(), this);
         getServer().getPluginManager().registerEvents(new MobDeathHandler(), this);
         getServer().getPluginManager().registerEvents(new InvClickHandler(), this);
         getServer().getPluginManager().registerEvents(new InvCloseHandler(), this);
+        getServer().getPluginManager().registerEvents(new CropGrowthListener(), this);
 
         new BukkitRunnable() {
             public void run() {

@@ -5,4 +5,8 @@ version: 1.0
 commands:
   getHopperWand:
     usage: /gethopperwand
-    description: test command
+    description: Give's user a hopper wand
+  hopperinfo:
+    usage: /hopperinfo
+    description: Give's users information about CollectionHoppers
+    aliases: [hi]

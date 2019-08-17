@@ -10,10 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class InvClickHandler implements Listener {
-    CollectionHoppers plugin = CollectionHoppers.getPlugin();
+    private CollectionHoppers plugin = CollectionHoppers.getPlugin();
     @EventHandler
     public void onInvClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
+
         if(event.getClickedInventory() != null) {
             if(event.getCurrentItem() != null) {
                 if(event.getClickedInventory().getTitle().equals(ChatColor.BLUE + "Collection Hopper")) {
