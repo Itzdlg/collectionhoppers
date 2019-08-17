@@ -28,7 +28,6 @@ public class InteractHandler implements Listener {
     private CollectionHoppers plugin = CollectionHoppers.getPlugin();
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-
         if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if(event.getClickedBlock().getType().equals(Material.HOPPER)) {
                 if (event.getItem() != null && event.getItem().getItemMeta() != null && event.getItem().getItemMeta().getLore() != null) {

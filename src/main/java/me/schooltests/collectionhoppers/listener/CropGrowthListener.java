@@ -19,27 +19,26 @@ public class CropGrowthListener implements Listener {
 	public final void onCropGrowth(BlockGrowEvent event){
 
 		CollectionHoppers plugin = CollectionHoppers.getPlugin();
-		Chunk c = event.getBlock().getLocation().getChunk();
-		Block block = event.getNewState().getBlock();
+		final Chunk c = event.getBlock().getLocation().getChunk();
+		final Block block = event.getNewState().getBlock();
 
 		//ItemStack for the cactus and sugar cane
-		ItemStack cactus = new ItemStack(Material.CACTUS);
-		ItemStack sugarCane = new ItemStack(Material.SUGAR_CANE);
+		final ItemStack cactus = new ItemStack(Material.CACTUS);
+		final ItemStack sugarCane = new ItemStack(Material.SUGAR_CANE);
 
-		//Tests to see if the block below is cactus before transfering the cactus or sugarcane
-		Location belowBlock = new Location(block.getWorld(), block.getX(), block.getY() - 1, block.getZ());
+		//Tests to see if the block below is cactus or sugar cane before transfering the cactus or sugarcane
+		final Location belowBlock = new Location(block.getWorld(), block.getX(), block.getY() - 1, block.getZ());
+
+		if(!plugin.hasChunk(c))
+			return;
 
 		CollectionHopper col = plugin.getHopperFromChunk(c);
 		if(belowBlock.getBlock().getType().equals(Material.CACTUS)) {
-			if(plugin.hasChunk(c)) {
 				event.setCancelled(true);
-				col.singleItemQueue(cactus);
-			}
+				col.queueItem(cactus);
 		}else if(belowBlock.getBlock().getType().equals(Material.SUGAR_CANE_BLOCK)){
-			if(plugin.hasChunk(c)) {
 				event.setCancelled(true);
-				col.singleItemQueue(sugarCane);
-			}
+				col.queueItem(sugarCane);
 		}
 
 	}

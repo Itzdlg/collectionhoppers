@@ -28,12 +28,14 @@ public class CollectionHopper implements ConfigurationSerializable {
         }
     }
 
-    public void singleItemQueue(ItemStack item) {
+    public void queueItem(ItemStack items) {
         if(chestLocation != null) {
             Block b = chestLocation.getWorld().getBlockAt(chestLocation);
             if (b.getType().equals(Material.CHEST)) {
                 Chest chest = (Chest) b.getState();
-                chest.getInventory().addItem(item);
+                    if (items.getAmount() > 0) {
+                        chest.getInventory().addItem(items);
+                    }
             }
         }
     }
