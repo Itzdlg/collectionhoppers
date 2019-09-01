@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class InteractHandler implements Listener {
-    CollectionHoppers plugin = CollectionHoppers.getPlugin();
+    private CollectionHoppers plugin = CollectionHoppers.getPlugin();
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {

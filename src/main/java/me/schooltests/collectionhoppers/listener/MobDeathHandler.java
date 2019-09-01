@@ -14,12 +14,14 @@ import java.util.List;
 
 public class MobDeathHandler implements Listener {
     private CollectionHoppers plugin = CollectionHoppers.getPlugin();
-    @EventHandler(priority = EventPriority.HIGHEST)
+
+    private final List<EntityType> passedMobs = Arrays.asList(EntityType.BAT, EntityType.OCELOT, EntityType.CHICKEN, EntityType.COW, EntityType.HORSE, EntityType.MUSHROOM_COW,
+            EntityType.PIG, EntityType.RABBIT, EntityType.SHEEP, EntityType.SQUID, EntityType.VILLAGER, EntityType.WOLF, EntityType.CAVE_SPIDER, EntityType.ENDERMAN, EntityType.SPIDER,
+            EntityType.PIG_ZOMBIE, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ENDERMITE, EntityType.GHAST, EntityType.MAGMA_CUBE, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SLIME,
+            EntityType.WITCH, EntityType.ZOMBIE, EntityType.IRON_GOLEM);
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onMobDeath(EntityDeathEvent event) {
-        List<EntityType> passedMobs = Arrays.asList(EntityType.BAT, EntityType.OCELOT, EntityType.CHICKEN, EntityType.COW, EntityType.HORSE, EntityType.MUSHROOM_COW,
-                EntityType.PIG, EntityType.RABBIT, EntityType.SHEEP, EntityType.SQUID, EntityType.VILLAGER, EntityType.WOLF, EntityType.CAVE_SPIDER, EntityType.ENDERMAN, EntityType.SPIDER,
-                EntityType.PIG_ZOMBIE, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ENDERMITE, EntityType.GHAST, EntityType.MAGMA_CUBE, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SLIME,
-                EntityType.WITCH, EntityType.ZOMBIE, EntityType.IRON_GOLEM);
         if(passedMobs.contains(event.getEntityType())) {
             Chunk c = event.getEntity().getLocation().getChunk();
             if(plugin.hasChunk(c)) {
